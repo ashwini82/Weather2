@@ -1,40 +1,73 @@
 
-.container{
+div.container-md{
   background-size: cover;
   background-color: cornflowerblue;
-  margin-top:100px;
+ margin-top: 20px;
+ margin-left:30%;
   align-items: center;
+  height:650px;
+  border-radius: 12px;
+  border:2px solid blue;
+ max-width: 600px;
 }
-.form{
-  padding-top:10%;
-  padding-left: 30%;
-  border-radius: 3px solid red;
+#des{
+  color:blue;
+  font-size: 30px;
 }
-.btn{
+img{
+ width:150px;
+  height:150px;
+  padding-bottom: 30px;
+}
+.button{
   background-color: green;
-  border-radius: 3px solid red;
-  
+  border-radius: 16px 16px 16px 16px;
 }
-.btn:hover{
+.button:hover{
   
   background-color: hotpink;
-
-}
-
-
-.temp{
-  border-radius: 3px solid red;
-}
-
-.display-text{
-  background-color: coral;
-  text-align: center;
-  font-weight: 20px;
-  font-size:4px ;
-  padding-left: 30%;
 }
 
 .App-header {
-  border-radius: 3px solid red;
+  color:blue;
   text-align: center;
+
+}
+
+
+
+.inp{
+     background-color: lightblue;
+     text-align: center;
+     border-radius: 16px 16px 16px 16px;
+}
+.display{
+  font-size: 20px;
+  font-weight:bold;
+  color:red;
+  text-decoration: underline;
+  font-family: serif;
+  border: 2px solid blue;
+  border-radius: 12px;
+  height:480px;
+  background-size: cover;
+ background-color: skyblue;
+  opacity: 0.8;
+}
+#city{
+  margin-top: 20px;
+}
+.tmp{
+
+  font-size: 40px;
+  font-weight: 700;
+ 
+ text-decoration: none;
+ text-shadow: 2px 6px rgba(0, 0, 0, 0.3);
+ box-shadow: rgba(0, 0, 0, 0.3);
+ border-radius: 20px 20px 20px 20px;
+ width: 80%;
+padding-left: 10px;
+ margin-top: 20px;
+ 
 }

@@ -1,44 +1,18 @@
 import React from "react";
 import moment from "moment";
-/*import "moment-timezone";
-import tz from "zipcode-to-timezone";*/
 import "./App.css";
+
 /* 5e0cd4889c06f9c4861fbd431372378f
 https://api.openweathermap.org/data/2.5/weather?zip={zip code},{country code}&appid={your api key}*/
-
 class App extends React.Component {
   state = {};
 
-  /*  getTime = () => {
-      const zone = tz.lookup(this.state.zip);
-      const now = Moment().tz(zone).format("dddd, MMMM Do YYYY, h:mm a");
-  
-      this.setState({
-        time: now,
-      });
-    };
-  
-    const time = moment()
-        .utcOffset(this.state.timezone / 60)
-        .format("llll");
-      let time = moment().format("llll");
-   
-      this.setState({
-        time: time,
-      });
-   
-    };*/
-  getTime = () => {
-    let time = moment().format("llll");
-    this.setState({
-      time: time,
-    });
-  };
   getWeather = () => {
     let inputValue = document.getElementById("zipInput").value;
-    /* fetch("https://api.openweathermap.org/data/2.5/weather?zip=" + zipInput + ",us&appid=" +
-       process.env.REACT_APP_OW_API_KEY)*/
-    fetch("https://api.openweathermap.org/data/2.5/weather?zip=" + inputValue + ",us&units=imperial&appid=5e0cd4889c06f9c4861fbd431372378f")
+    /*   fetch("https://api.openweathermap.org/data/2.5/weather?zip=" + inputValue + ",us&appid=" +
+         process.env.REACT_APP_OW_API_KEY)*/
+    fetch("https://api.openweathermap.org/data/2.5/weather?zip=" + inputValue +
+      ",us&units=metric&appid=5e0cd4889c06f9c4861fbd431372378f")
 
       .then((response) => {
         if (response.status !== 200) {
@@ -52,16 +26,17 @@ class App extends React.Component {
 
           this.setState({
 
-            temperature: data.main.temp,
-            tempmax: data.main.temp_max,
-            tempmin: data.main.temp_min,
+            time: moment().utcOffset(data.timezone / 60 / 60)
+              .format('llll'),
+
+            temperature: Math.round(data.main.temp) + "°C",
+            wind: data.wind.speed,
+            humidity: data.main.humidity,
             city: data.name,
             description: data.weather[0].description,
             Country: data.sys.country,
-            //   timezone: data.timezone,
+            icon: data.weather[0].icon,
           });
-
-          this.getTime();
         });
       }
       )
@@ -71,27 +46,46 @@ class App extends React.Component {
   };
 
   render() {
-    return (
-      <div className="container">
 
-        <div className="display-1 ">
-          <h1 className="App-header">Weather App</h1>
+    return (
+
+      <div className="container-md">
+
+        <div>
+          <h1 className="App-header">Current Weather</h1>
         </div>
-        <div className="display">
-          <input type="text" id="zipInput" placeholder="Enter"></input>
-          <button className="btn" onClick={this.getWeather}>Search</button>
+        <div className="display1 text-center p-2">
+          <input className="inp" type="text" id="zipInput" placeholder="Enter Zip Here"></input>
+          <button className="button" onClick={this.getWeather}>Search</button>
         </div >
-        <div className="display">
-          <p>{this.state.city}   {this.state.Country}</p>
-          <p>{this.state.temperature} </p>
-          <p>{this.state.tempmax}   {this.state.tempmin}</p>
-          <p>{this.state.description}</p>
+        <div className="display text-center ">
+          <p id="city">{this.state.city}
+            {this.state.Country}
+          </p>
           <p>{this.state.time}</p>
 
+          <p>Temp:
+            <span className="tmp">
+              {this.state.temperature}
+            </span> </p>
+
+          <p id="des">Description:{this.state.description}</p>
+          <div>
+            <p>Humidity : {this.state.humidity}</p>
+          </div>
+          <div>
+            <p>Wind speed : {this.state.wind}</p>
+          </div>
+          <img
+            src={`http://openweathermap.org/img/w/${this.state.icon}.png`}
+            alt=""
+          ></img>
+
         </div>
-      </div >
+
+      </div>
     )
-  }
+  };
 }
 
 export default App;
